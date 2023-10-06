@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>p5play</title>
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+			align-items: center;
+			overscroll-behavior: none;
+		}
+		canvas{
+			display: flex; /* Elimina el espacio adicional debajo del canvas */
+			justify-content: center;
+            margin: 0 auto;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<script src="node_modules/p5/lib/p5.js"></script>
+		<script src="node_modules/p5/lib/addons/p5.sound.min.js"></script>
+		<script src="node_modules/p5play/planck.min.js"></script>
+		<script src="node_modules/p5play/p5play.js"></script>
+		<script src="sketch.js"></script>
+	</div>
+</body>
+
+</html>
