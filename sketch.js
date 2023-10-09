@@ -14,10 +14,6 @@ function setup() {
 	wall4 = new Sprite(650 / 2, 650, 650, 1, 'static');
 
 	agua = new Sprite(100, 100, 10, 20, "static");
-	agua.collideTop = false;
-	agua.collideDown = false;
-	agua.collideRight = false;
-	agua.collideLeft = false;
 }
 
 function draw() {
@@ -39,4 +35,20 @@ function draw() {
 		ball.vel.y = 0;
 	}
 
+	changeCharacter();
+}
+
+function changeCharacter(){
+	if (kb.pressing('1')) {
+		ball.text = "Agua";
+	}
+	if (kb.pressing('2')) {
+		ball.text = "Fuego";
+	}
+	if (kb.pressing('3')) {
+		ball.text = "Viento";
+	}
+	if (kb.pressing('4')) {
+		ball.text = "Electro";
+	}
 }
