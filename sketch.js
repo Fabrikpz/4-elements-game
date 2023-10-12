@@ -8,6 +8,10 @@ let llave1Obtained = false;
 let llave2Obtained = false;
 let llave3Obtained = false;
 let llave4Obtained = false;
+let puertaElectro;
+let button;
+let puertaAbierta = false;
+let monedaRecogida;
 
 function setup() {
 	new Canvas(650, 650);
@@ -56,7 +60,7 @@ function setup() {
 		[1, 0, 0, 0, 1],
 		[1, 0, 1, 1, 1],
 		[2, 0, 0, 0, 0],
-		[1, 1, 1, 1, 1]
+		[1, 3, 1, 1, 1]
 	];
 
 	for (let i = 0; i < laberinto.length; i++) {
@@ -68,11 +72,18 @@ function setup() {
 			if (laberinto[i][j] === 2) {
 				rect = new Sprite(j * 55, i * 55, 45, 55, "static");
 				rect.color = 'black';
-				button = new Sprite(j * 55+25, i * 55, 2, 6, "static");
+				button = new Sprite(j * 55 + 25, i * 55, 2, 6, "static");
 				button.color = "red";
 			}
+			if (laberinto[i][j] === 3) {
+				puertaElectro = new Sprite(j * 55, i * 55, 45, 55, "static");
+				puertaElectro.color = 'black';
+			}
+
+
 		}
 	}
+
 	agua1 = new Sprite(999, 999, 1, 1);
 }
 
@@ -82,6 +93,16 @@ function draw() {
 
 	fill("lightblue");
 	square(137.5, 138, 55);
+	
+
+    if (puertaAbierta) {
+        setTimeout(() => {
+            puertaAbierta = false;
+            puertaElectro = new Sprite(25, 25, 45, 55, "static");
+            puertaElectro.color = 'black';
+        }, 3000);
+    }
+}
 
 	if (kb.pressing('left')) {
 		player.vel.x = -2;
@@ -112,8 +133,9 @@ function draw() {
 		miniJefe.moveTowards(player, 0.01);
 	}
 
-	changeCharacter();
-}
+changeCharacter();
+
+ 
 
 function changeCharacter() {
 	if (kb.pressing('1')) {
@@ -136,10 +158,19 @@ function changeCharacter() {
 		player.text = "Electro";
 		agua1.remove();
 		agua1 = new Sprite(165, 165, 55, 55, "static");
-		agua1.color = 'lightblue';	
-		//hacer if para el boton
-		if(llave1Obtained){ //llave fue obtenida
-			console.log("chango")
+		agua1.color = 'lightblue';
+		if (player.text === "Electro" && player.overlaps(button, () => {
+			if (monedaRecogida) {
+			puertaAbierta = true;
+			puertaElectro.remove();
+		} else {
+			alert("¡Necesitas recoger la moneda primero!");
+		}
+		})) {
+			
+		
+
 		}
 	}
+	
 }
