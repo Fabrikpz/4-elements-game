@@ -1,5 +1,9 @@
 let player, wall1, wall2, wall3, wall4, agua, llaves, llaveCount, miniJefe;
 let tieneLlave = false;
+let vidaEnemigo = 5;
+let tiempoMonedas = 0;
+let agua1;
+
 
 function setup() {
 	new Canvas(650, 650);
@@ -25,8 +29,8 @@ function setup() {
 	while (llaves.length < 4) {
 		let llave = new llaves.Sprite();
 	}
-	llaves[0].y = 25;
-	llaves[0].x = 25;
+	llaves[0].y = 55;
+	llaves[0].x = 170;
 	llaves[1].y = 25;
 	llaves[1].x = 625;
 	llaves[2].y = 625;
@@ -38,10 +42,37 @@ function setup() {
 		llave.remove();
 		llaveCount++;
 	});
+	laberinto = [
+		[1, 1, 1, 1, 1],
+		[1, 0, 0, 0, 1],
+		[1, 0, 1, 1, 1],
+		[2, 0, 0, 0, 0],
+		[1, 1, 1, 1, 1]
+	];
+
+	for (let i = 0; i < laberinto.length; i++) {
+		for (let j = 0; j < laberinto[i].length; j++) {
+			if (laberinto[i][j] === 1) {
+				rect = new Sprite(j * 55, i * 55, 55, 55, "static");
+				rect.color = 'black';
+			}
+			if (laberinto[i][j] === 2) {
+				rect = new Sprite(j * 55, i * 55, 45, 55, "static");
+				rect.color = 'black';
+				button = new Sprite(j * 55+25, i * 55, 2, 6, "static");
+				button.color = "red";
+			}
+		}
+	}
+	agua1 = new Sprite(999, 999, 1, 1);
 }
+
 
 function draw() {
 	background('gray');
+
+	fill("lightblue");
+	square(137.5, 138, 55);
 
 	if (kb.pressing('left')) {
 		player.vel.x = -2;
@@ -67,8 +98,8 @@ function draw() {
 	//abajo (player.y <= miniJefe.y+100 && player.y >= miniJefe.y)
 	//izq (player.x >= miniJefe.x-100 && player.x <= miniJefe.x)
 	//der (player.x <= miniJefe.x+100 && player.x >= miniJefe.x)
-	
-	if((player.x >= miniJefe.x-100 && player.x <= miniJefe.x)){
+
+	if ((player.y <= miniJefe.y + 200 && player.y >= miniJefe.y) || (player.y >= miniJefe.y - 200 && player.y <= miniJefe.y)) {
 		miniJefe.moveTowards(player, 0.01);
 	}
 
@@ -78,14 +109,25 @@ function draw() {
 function changeCharacter() {
 	if (kb.pressing('1')) {
 		player.text = "Agua";
+		agua1.remove();
 	}
 	if (kb.pressing('2')) {
 		player.text = "Fuego";
+		agua1.remove();
+		agua1 = new Sprite(165, 165, 55, 55, "static");
+		agua1.color = 'lightblue';
 	}
 	if (kb.pressing('3')) {
 		player.text = "Viento";
+		agua1.remove();
+		agua1 = new Sprite(165, 165, 55, 55, "static");
+		agua1.color = 'lightblue';
 	}
 	if (kb.pressing('4')) {
 		player.text = "Electro";
+		agua1.remove();
+		agua1 = new Sprite(165, 165, 55, 55, "static");
+		agua1.color = 'lightblue';	
+		//hacer if para el boton
 	}
 }
