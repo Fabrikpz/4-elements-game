@@ -3,7 +3,11 @@ let tieneLlave = false;
 let vidaEnemigo = 5;
 let tiempoMonedas = 0;
 let agua1;
-
+let llave1, llave2, llave3, llave4;
+let llave1Obtained = false;
+let llave2Obtained = false;
+let llave3Obtained = false;
+let llave4Obtained = false;
 
 function setup() {
 	new Canvas(650, 650);
@@ -37,11 +41,16 @@ function setup() {
 	llaves[2].x = 25;
 	llaves[3].y = 625;
 	llaves[3].x = 625;
+	llave1 = llaves[0];
+	llave2 = llaves[1];
+	llave3 = llaves[2];
+	llave4 = llaves[3];
 
 	player.overlaps(llaves, (player, llave) => {
 		llave.remove();
 		llaveCount++;
 	});
+
 	laberinto = [
 		[1, 1, 1, 1, 1],
 		[1, 0, 0, 0, 1],
@@ -129,5 +138,8 @@ function changeCharacter() {
 		agua1 = new Sprite(165, 165, 55, 55, "static");
 		agua1.color = 'lightblue';	
 		//hacer if para el boton
+		if(llave1Obtained){ //llave fue obtenida
+			console.log("chango")
+		}
 	}
 }
