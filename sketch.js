@@ -11,7 +11,7 @@ let llave4Obtained = false;
 let puertaElectro;
 let button;
 let puertaAbierta = false;
-let monedaRecogida;
+let llaveRecogida = false;
 
 function setup() {
 	new Canvas(650, 650);
@@ -50,8 +50,25 @@ function setup() {
 	llave3 = llaves[2];
 	llave4 = llaves[3];
 
-	player.overlaps(llaves, (player, llave) => {
-		llave.remove();
+	player.overlaps(llave1, (player, llave1) => {
+		llave1.remove();
+		llaveCount++;
+		llaveRecogida = true;
+	});
+
+	player.overlaps(llave2, (player, llave2) => {
+		llave2.remove();
+		llaveCount++;
+	});
+
+	player.overlaps(llave3, (player, llave3) => {
+		llave3.remove();
+		llaveCount++;
+	});
+
+
+	player.overlaps(llave4, (player, llave4) => {
+		llave4.remove();
 		llaveCount++;
 	});
 
@@ -79,8 +96,6 @@ function setup() {
 				puertaElectro = new Sprite(j * 55, i * 55, 45, 55, "static");
 				puertaElectro.color = 'black';
 			}
-
-
 		}
 	}
 
@@ -93,16 +108,14 @@ function draw() {
 
 	fill("lightblue");
 	square(137.5, 138, 55);
-	
 
-    if (puertaAbierta) {
-        setTimeout(() => {
-            puertaAbierta = false;
-            puertaElectro = new Sprite(25, 25, 45, 55, "static");
-            puertaElectro.color = 'black';
-        }, 3000);
-    }
-}
+	if (puertaAbierta) {
+		setTimeout(() => {
+			puertaAbierta = false;
+			puertaElectro = new Sprite(55, 220, 45, 55, "static");
+			puertaElectro.color = 'black';
+		}, 3000);
+	}
 
 	if (kb.pressing('left')) {
 		player.vel.x = -2;
@@ -133,9 +146,15 @@ function draw() {
 		miniJefe.moveTowards(player, 0.01);
 	}
 
-changeCharacter();
+	if(player.text == "Electro" && player.overlaps(button, () => {
+		if (llaveRecogida) {
+			puertaAbierta = true;
+			puertaElectro.remove();
+		}
+	}));
 
- 
+	changeCharacter();
+}
 
 function changeCharacter() {
 	if (kb.pressing('1')) {
@@ -159,18 +178,6 @@ function changeCharacter() {
 		agua1.remove();
 		agua1 = new Sprite(165, 165, 55, 55, "static");
 		agua1.color = 'lightblue';
-		if (player.text === "Electro" && player.overlaps(button, () => {
-			if (monedaRecogida) {
-			puertaAbierta = true;
-			puertaElectro.remove();
-		} else {
-			alert("¡Necesitas recoger la moneda primero!");
-		}
-		})) {
-			
-		
-
-		}
+		console.log(player.text)
 	}
-	
 }
