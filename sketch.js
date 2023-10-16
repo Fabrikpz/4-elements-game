@@ -1,4 +1,4 @@
-	let player, wall1, wall2, wall3, wall4, agua, llaves, llaveCount, miniJefe;
+	let player, wallave2Obtainedll1, wall2, wall3, wall4, agua, llaves, llaveCount, miniJefe;
 	let tieneLlave = false;
 	let vidaEnemigo = 5;
 	let tiempoMonedas = 0;
@@ -15,7 +15,8 @@
 	let shots;
 	let shotsColor = "blue";
 	let playerType;
-
+	let llaveElectro = false;
+	
 	function setup() {
 		new Canvas(650, 650);
 
@@ -77,7 +78,23 @@
 			llave4.remove();
 			llaveCount++;
 		});
+		
+		laberinto1 = [
+			[1, 1, 1,1],
+			[1, 0, 0, 1],
+			[1, 0, 0,1],
+			[1, 0, 0,1],
+			[1, 1, 1, 1]
+		];
 
+		for (let i = 0; i < laberinto1.length; i++) {
+			for (let j = 0; j < laberinto1[i].length; j++) {
+				if (laberinto1[i][j] === 1) {
+					rect = new Sprite(j * 650, i * 305, 10, 22, "static");
+					rect.color = 'black';
+				}
+			}
+		}
 		laberinto = [
 			[1, 1, 1, 1, 1],
 			[1, 0, 0, 0, 1],
@@ -152,13 +169,26 @@
 		if ((player.y <= miniJefe.y + 200 && player.y >= miniJefe.y) || (player.y >= miniJefe.y - 200 && player.y <= miniJefe.y)) {
 			miniJefe.moveTowards(player, 0.01);
 		}
-
+// se podria sacar 
 		if(player.text == "Electro" && player.overlaps(button, () => {
 			if (llaveRecogida) {
 				puertaAbierta = true;
 				puertaElectro.remove();
 			}
 		}));
+		
+		function onCollision(other) {
+			if (other.name == "llaveElectro") {
+			  llaveElectro = true;
+			}
+		  }
+		
+		function update() {
+			if (llaveElectro) {
+			  // Abrir la puerta.
+			}
+		  }
+		  
 
 		changeCharacter();
 
@@ -201,6 +231,7 @@
 			agua1.remove();
 			agua1 = new Sprite(165, 165, 55, 55, "static");
 			agua1.color = 'lightblue';
+			shotsColor = "grey"
 			playerType = "Viento";
 		}
 		if (kb.pressed('4')) {
@@ -208,7 +239,7 @@
 			agua1.remove();
 			agua1 = new Sprite(165, 165, 55, 55, "static");
 			agua1.color = 'lightblue';
-			console.log(player.text)
+			shotsColor = "yellow";
 			playerType = "Electro";
 		}
 	}
