@@ -199,13 +199,13 @@
 			  llaves[3].x = 625;
 			  llaves[3].y = 625;
 			  tiempLlave4 = true;
-			} else {
+			} //else {
 			  // La llave 4 desaparece
-			  llaves[3].x = -100; // Mueve la llave fuera del lienzo
-			  llaves[3].y = -100;
-			  tiempLlave4 = false;
-			}
-			tiempoLlave4 = 0; // Reiniciar el tiempo
+			 // llaves[3].x = -100; // Mueve la llave fuera del lienzo
+			 // llaves[3].y = -100;
+			  //tiempLlave4 = false;
+			//}
+			//tiempoLlave4 = 0; // Reiniciar el tiempo
 		  }
 		function update() {
 			if (llaveElectro) {
