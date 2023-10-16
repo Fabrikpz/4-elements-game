@@ -1,7 +1,9 @@
 	let player, wallave2Obtainedll1, wall2, wall3, wall4, agua, llaves, llaveCount, miniJefe;
-	let tieneLlave = false;
+	let miniJefeImagen; 
+	let tiempLlave4 = false;
 	let vidaEnemigo = 5;
-	let tiempoMonedas = 0;
+	let tiempoLlave4 = 0;
+	const intervaloLlave4 = 5000;
 	let agua1;
 	let llave1, llave2, llave3, llave4;
 	let llave1Obtained = false;
@@ -16,7 +18,8 @@
 	let shotsColor = "blue";
 	let playerType;
 	let llaveElectro = false;
-	
+	let llavCount = 0; //llaves encontradas
+	  
 	function setup() {
 		new Canvas(650, 650);
 
@@ -25,10 +28,11 @@
 		player.rotationLock = true;
 
 		shots = new Group();
-
+		miniJefeImagen = loadImage()
 		miniJefe = new Sprite(650 / 2, 650 / 2, 65);
 		miniJefe.mass = 1;
 		miniJefe.text = "Mini jefe";
+		
 
 		//los murhos
 		wall1 = new Sprite(0, 650 / 2, 1, 650, 'static');
@@ -56,41 +60,47 @@
 		llave2 = llaves[1];
 		llave3 = llaves[2];
 		llave4 = llaves[3];
-
+//en lo de count cambie por uan variable llavcount
 		player.overlaps(llave1, (player, llave1) => {
 			llave1.remove();
-			llaveCount++;
+			llavCount++;
 			llaveRecogida = true;
 		});
+	
 
 		player.overlaps(llave2, (player, llave2) => {
 			llave2.remove();
-			llaveCount++;
+			llavCount++;
 		});
 
 		player.overlaps(llave3, (player, llave3) => {
 			llave3.remove();
-			llaveCount++;
+			llavCount++;
 		});
 
 
 		player.overlaps(llave4, (player, llave4) => {
 			llave4.remove();
-			llaveCount++;
+			llavCount;
 		});
 		
-		laberinto1 = [
+		colec = [
 			[1, 1, 1, 1],
 			[1, 0, 0, 1],
 			[1, 0, 0, 1],
-			[1, 1, 1, 1]
+			[1, 1, 1, 1],
+		
 		];
-
-		for (let i = 0; i < laberinto1.length; i++) {
-			for (let j = 0; j < laberinto1[i].length; j++) {
-				if (laberinto1[i][j] === 1) {
-					rect = new Sprite(j * 315, i * 605, 20, 500, "static");
+		
+		var randomNumber = Math.floor(Math.random() * 100) + 1;
+		for (let i = 0; i < colec.length; i++) {
+			for (let j = 0; j < colec[i].length; j++) {
+				if (colec[i][j] === 1) {
+					rect = new Sprite(j * 315, i * 40, 25,  220, "static");
 					rect.color = 'black';
+					if (randomNumber % 2 == 0) {
+						llaves.isFake = true;
+					  }
 				}
 			}
 		}
@@ -131,6 +141,10 @@
 
 		fill("lightblue");
 		square(137.5, 138, 55);
+		//para contar si estan las 4 llaves
+		if ( llavCount === 4) {
+			tieneLlave = true;
+		  }
 
 		if (puertaAbierta) {
 			setTimeout(() => {
@@ -156,10 +170,7 @@
 			player.vel.y = 0;
 		}
 
-		if (llaveCount === 4) {
-			tieneLlave = true;
-		}
-
+	
 		//arriba (player.y >= miniJefe.y-100 && player.y <= miniJefe.y)
 		//abajo (player.y <= miniJefe.y+100 && player.y >= miniJefe.y)
 		//izq (player.x >= miniJefe.x-100 && player.x <= miniJefe.x)
@@ -181,7 +192,21 @@
 			  llaveElectro = true;
 			}
 		  }
-		
+		  tiempoLlave4 += deltaTime;
+		  if (tiempoLlave4 >= intervaloLlave4) {
+			if (!tiempLlave4) {
+			  // La llave 4 aparece en una posición
+			  llaves[3].x = 625;
+			  llaves[3].y = 625;
+			  tiempLlave4 = true;
+			} else {
+			  // La llave 4 desaparece
+			  llaves[3].x = -100; // Mueve la llave fuera del lienzo
+			  llaves[3].y = -100;
+			  tiempLlave4 = false;
+			}
+			tiempoLlave4 = 0; // Reiniciar el tiempo
+		  }
 		function update() {
 			if (llaveElectro) {
 			  // Abrir la puerta.
