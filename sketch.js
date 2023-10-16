@@ -210,7 +210,7 @@
 		function update() {
 			if (llaveElectro) {
 			  // Abrir la puerta.
-			}
+			} 
 		  }
 		  
 
