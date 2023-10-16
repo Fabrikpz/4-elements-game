@@ -80,17 +80,16 @@
 		});
 		
 		laberinto1 = [
-			[1, 1, 1,1],
+			[1, 1, 1, 1],
 			[1, 0, 0, 1],
-			[1, 0, 0,1],
-			[1, 0, 0,1],
+			[1, 0, 0, 1],
 			[1, 1, 1, 1]
 		];
 
 		for (let i = 0; i < laberinto1.length; i++) {
 			for (let j = 0; j < laberinto1[i].length; j++) {
 				if (laberinto1[i][j] === 1) {
-					rect = new Sprite(j * 650, i * 305, 10, 22, "static");
+					rect = new Sprite(j * 315, i * 605, 20, 500, "static");
 					rect.color = 'black';
 				}
 			}
