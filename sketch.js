@@ -7,6 +7,7 @@
 	let tiempoLlave4 = 0;
 	const intervaloLlave4 = 5000;
 	let agua1;
+	let viento1;
 	let llave1, llave2, llave3, llave4;
 	let llave1Obtained = false;
 	let llave2Obtained = false;
@@ -43,9 +44,9 @@
 		wall3 = new Sprite(650, 650 / 2, 1, 650, 'static');
 		wall4 = new Sprite(650 / 2, 650, 650, 1, 'static');
 		//siguiente muro
-		wall11 = new Sprite(340, 100, 20, 300, 'static');
+		wall11 = new Sprite(349, 100, 5, 300, 'static');
 		wall12 = new Sprite(640, 100, 20, 300, 'static');
-		wallg  = new Sprite(435, 160, 12, 180, 'static');
+		wallg  = new Sprite(435, 160, 15, 180, 'static');
 		wallf  = new Sprite(500, 160,12, 180, 'static');
 		wally = new Sprite(536, 75, 70, 10, 'static');
 		wally2 = new Sprite(572, 100, 10, 60, 'static');
@@ -56,7 +57,17 @@
 		wall111 = new Sprite(580, 245, 150, 10, 'static');
 		//pared arriba 
 		wall14 = new Sprite(490, 5, 280, 10, 'static');
-
+		wall11.color = "black";
+		wall12.color = "black";
+		wall13.color = "black";
+		wall14.color = "black";
+		wall111.color = "black";
+		wallg.color = "black";
+		wallf.color = "black";
+		wally.color = "black";
+		wally2.color = "black";
+		wally3.color = "black";
+		
 
 		agua = new Sprite(100, 100, 10, 20, "static");
 
@@ -131,6 +142,9 @@
 		}
 
 		agua1 = new Sprite(999, 999, 1, 1);
+		viento1 = new Sprite(415, 40, 55, 55, "static");
+		viento1.color = "grey";
+		//viento1 = new Sprite(700, 700, 1, 1);
 	}
 
 
@@ -140,6 +154,9 @@
 
 		fill("lightblue");
 		square(137.5, 138, 55);
+
+		fill("gray");
+		square(388, 12.5, 55);
 		//para contar si estan las 4 llaves
 		if ( llavCount === 4) {
 			tieneLlave = true;
@@ -241,6 +258,9 @@
 			agua1.remove();
 			shotsColor = "blue";
 			playerType = "Agua";
+			viento1.remove();
+			viento1 = new Sprite(415, 40, 55, 55, "static");
+			viento1.color = 'grey';
 		}
 		if (kb.pressed('2')) {
 			player.text = "Fuego";
@@ -249,6 +269,9 @@
 			agua1.color = 'lightblue';
 			shotsColor = "red";
 			playerType = "Fuego";
+			viento1.remove();
+			viento1 = new Sprite(415, 40, 55, 55, "static");
+			viento1.color = 'grey';
 		}
 		if (kb.pressed('3')) {
 			player.text = "Viento";
@@ -257,6 +280,7 @@
 			agua1.color = 'lightblue';
 			shotsColor = "grey"
 			playerType = "Viento";
+			viento1.remove();
 		}
 		if (kb.pressed('4')) {
 			player.text = "Electro";
@@ -265,5 +289,7 @@
 			agua1.color = 'lightblue';
 			shotsColor = "yellow";
 			playerType = "Electro";
+			viento1 = new Sprite(415, 40, 55, 55, "static");
+			viento1.color = 'grey';
 		}
 	}
