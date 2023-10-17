@@ -1,5 +1,7 @@
+	let wall11,wall12,wall13,wall14,wall111,wallg,	wallf  ,wally,wally2,wally3 
 	let player, wallave2Obtainedll1, wall2, wall3, wall4, agua, llaves, llaveCount, miniJefe;
 	let miniJefeImagen; 
+	let personaimagen;
 	let tiempLlave4 = false;
 	let vidaEnemigo = 5;
 	let tiempoLlave4 = 0;
@@ -24,6 +26,7 @@
 		new Canvas(650, 650);
 
 		player = new Sprite(650 / 2, 600, 50);
+		// correjir !personaimagen = loadImage('Captura.PNG')
 		player.text = "Agua";
 		player.rotationLock = true;
 
@@ -39,6 +42,21 @@
 		wall2 = new Sprite(650 / 2, 0, 650, 1, 'static');
 		wall3 = new Sprite(650, 650 / 2, 1, 650, 'static');
 		wall4 = new Sprite(650 / 2, 650, 650, 1, 'static');
+		//siguiente muro
+		wall11 = new Sprite(340, 100, 20, 300, 'static');
+		wall12 = new Sprite(640, 100, 20, 300, 'static');
+		wallg  = new Sprite(435, 160, 12, 180, 'static');
+		wallf  = new Sprite(500, 160,12, 180, 'static');
+		wally = new Sprite(536, 75, 70, 10, 'static');
+		wally2 = new Sprite(572, 100, 10, 60, 'static');
+		wally3 = new Sprite(600, 185, 70, 3, 'static');
+		
+		//wall13 = new Sprite(490, 245, 280, 10, 'static');
+		wall13 = new Sprite(395, 245, 90, 10, 'static');
+		wall111 = new Sprite(580, 245, 150, 10, 'static');
+		//pared arriba 
+		wall14 = new Sprite(490, 5, 280, 10, 'static');
+
 
 		agua = new Sprite(100, 100, 10, 20, "static");
 
@@ -84,26 +102,7 @@
 			llavCount;
 		});
 		
-		colec = [
-			[1, 1, 1, 1],
-			[1, 0, 0, 1],
-			[1, 0, 0, 1],
-			[1, 1, 1, 1],
 		
-		];
-		
-		var randomNumber = Math.floor(Math.random() * 100) + 1;
-		for (let i = 0; i < colec.length; i++) {
-			for (let j = 0; j < colec[i].length; j++) {
-				if (colec[i][j] === 1) {
-					rect = new Sprite(j * 315, i * 40, 25,  220, "static");
-					rect.color = 'black';
-					if (randomNumber % 2 == 0) {
-						llaves.isFake = true;
-					  }
-				}
-			}
-		}
 		laberinto = [
 			[1, 1, 1, 1, 1],
 			[1, 0, 0, 0, 1],
@@ -237,6 +236,7 @@
 
 	function changeCharacter() {
 		if (kb.pressed('1')) {
+			//personaimagen = loadImage('Captura.PNG')
 			player.text = "Agua";
 			agua1.remove();
 			shotsColor = "blue";
