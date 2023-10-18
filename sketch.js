@@ -1,6 +1,9 @@
 let wall11, wall12, wall13, wall14, wall111, wallg, wallf, wally, wally2, wally3
 let player, wallave2Obtainedll1, wall2, wall3, wall4, agua, llaves, miniJefe;
-let miniJefeImagen;
+let pared1,pared2,pared3,pared4,pared5
+let pared11,pared21,pared32,pared42,pared52
+
+//let miniJefeImagen;
 let personaimagen;
 let tiempLlave4 = false;
 let vidaEnemigo = 5;
@@ -57,6 +60,24 @@ function setup() {
 	wally = new Sprite(536, 75, 70, 10, 'static');
 	wally2 = new Sprite(572, 100, 10, 60, 'static');
 	wally3 = new Sprite(600, 185, 70, 3, 'static');
+	// tercer minijuego
+	//pared abajo
+	pared1  = new Sprite(162, 597, 217, 1, 'static');
+	//pared!
+	pared2  = new Sprite(53, 473, 1, 248, 'static');
+//pared arriba
+	pared3 = new Sprite(103, 350, 100, 1, 'static');
+	//pared arriba
+	pared5 = new Sprite(210, 350, 120, 1, 'static');
+//pared de la  !
+	pared4 = new Sprite(270, 473, 1, 248, 'static');
+
+	pared11 = new Sprite(53, 473, 1, 248, 'static');
+	pared21 = new Sprite(53, 473, 1, 248, 'static');
+	pared32 = new Sprite(53, 473, 1, 248, 'static');
+	pared42 = new Sprite(53, 473, 1, 248, 'static');
+	pared52 = new Sprite(53, 473, 1, 248, 'static');
+
 
 	//wall13 = new Sprite(490, 245, 280, 10, 'static');
 	wall13 = new Sprite(395, 245, 90, 10, 'static');
@@ -198,27 +219,6 @@ function draw() {
 
 	if ((player.y <= miniJefe.y + 200 && player.y >= miniJefe.y) || (player.y >= miniJefe.y - 200 && player.y <= miniJefe.y)) {
 		miniJefe.moveTowards(player, 0.01);
-	}
-
-	tiempoLlave4 += deltaTime;
-	if (tiempoLlave4 >= intervaloLlave4) {
-		if (!tiempLlave4) {
-			// La llave 4 aparece en una posición
-			llaves[3].x = 625;
-			llaves[3].y = 625;
-			tiempLlave4 = true;
-		} //else {
-		// La llave 4 desaparece
-		// llaves[3].x = -100; // Mueve la llave fuera del lienzo
-		// llaves[3].y = -100;
-		//tiempLlave4 = false;
-		//}
-		//tiempoLlave4 = 0; // Reiniciar el tiempo
-	}
-	function update() {
-		if (llaveElectro) {
-			// Abrir la puerta.
-		}
 	}
 
 	changeCharacter();
