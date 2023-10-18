@@ -1,8 +1,8 @@
 let wall11, wall12, wall13, wall14, wall111, wallg, wallf, wally, wally2, wally3
 let player, wallave2Obtainedll1, wall2, wall3, wall4, agua, llaves, miniJefe;
 let pared1,pared2,pared3,pared4,pared5
-let pared11,pared21,pared32,pared42,pared52
-
+let pared11,pared21,pared32,pared42,pared52,pared111,pared521
+let pared41, pared40 ,pared43 ,pared44 ,pared45 ,pared46 ,pared47 ,pared48, pared49
 //let miniJefeImagen;
 let personaimagen;
 let tiempLlave4 = false;
@@ -72,11 +72,22 @@ function setup() {
 //pared de la  !
 	pared4 = new Sprite(270, 473, 1, 248, 'static');
 
-	pared11 = new Sprite(190, 500, 300, 2, 'static');
-	pared21 = new Sprite(53, 473, 1, 248, 'static');
-	pared32 = new Sprite(53, 473, 1, 248, 'static');
-	pared42 = new Sprite(53, 473, 1, 248, 'static');
-	pared52 = new Sprite(53, 473, 1, 248, 'static');
+	pared11 = new Sprite(160, 544, 110, 1, 'static');
+	pared21 = new Sprite(105, 472, 1, 140, 'static');
+	pared32 = new Sprite(160, 402, 110, 1, 'static');
+	pared52 = new Sprite(215, 445, 1, 85 , 'static');
+	pared111 = new Sprite(188, 488, 55, 1, 'static');
+	pared521 = new Sprite(161, 474, 1, 28 , 'static');
+
+
+	//ultimo mini juego 
+	pared41 = new Sprite(460, 595, 110, 1, 'static');
+	pared40 = new Sprite(597, 620, 1, 100, 'static');
+	pared43 = new Sprite(590, 515, 150, 1, 'static');
+	pared44 = new Sprite(568, 620, 1, 100 , 'static');
+	pared45 = new Sprite(582, 569, 29, 1, 'static');
+	pared46 = new Sprite(516, 555, 1, 80 , 'static');
+
 
 
 	//wall13 = new Sprite(490, 245, 280, 10, 'static');
@@ -107,8 +118,8 @@ function setup() {
 	llaves[0].x = 170;
 	llaves[1].y = 220;
 	llaves[1].x = 390;
-	llaves[2].y = 625;
-	llaves[2].x = 25;
+	llaves[2].y = 480;
+	llaves[2].x = 195;
 	llaves[3].y = 625;
 	llaves[3].x = 625;
 	llave1 = llaves[0];
@@ -183,6 +194,23 @@ function draw() {
 
 	fill("gray");
 	square(388, 12.5, 55);
+	fill("red");
+	square(405, 595, 55);
+	fill("grey");
+	square(460, 595, 55);
+	fill("yellow");
+	square(515, 595, 54);
+	fill("blue");
+	square(515, 540, 54);
+	fill("red");
+	square(515, 515, 53);
+
+	fill("grey");
+	square(563, 515, 53);
+	fill("yellow");
+	square(603, 515, 53);
+	fill("blue");
+	square(603, 575, 70);
 	//para contar si estan las 4 llaves
 	if (llaveCount === 4) {
 		tieneLlave = true;
