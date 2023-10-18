@@ -68,11 +68,11 @@ function setup() {
 //pared arriba
 	pared3 = new Sprite(103, 350, 100, 1, 'static');
 	//pared arriba
-	pared5 = new Sprite(210, 350, 120, 1, 'static');
+	pared5 = new Sprite(155, 350, 120, 1, 'static');
 //pared de la  !
 	pared4 = new Sprite(270, 473, 1, 248, 'static');
 
-	pared11 = new Sprite(53, 473, 1, 248, 'static');
+	pared11 = new Sprite(190, 500, 300, 2, 'static');
 	pared21 = new Sprite(53, 473, 1, 248, 'static');
 	pared32 = new Sprite(53, 473, 1, 248, 'static');
 	pared42 = new Sprite(53, 473, 1, 248, 'static');
