@@ -1,8 +1,8 @@
 let wall11, wall12, wall13, wall14, wall111, wallg, wallf, wally, wally2, wally3
 let player, wallave2Obtainedll1, wall2, wall3, wall4, agua, llaves, miniJefe;
-let pared1,pared2,pared3,pared4,pared5
-let pared11,pared21,pared32,pared42,pared52,pared111,pared521
-let pared41, pared40 ,pared43 ,pared44 ,pared45 ,pared46 ,pared47 ,pared48, pared49
+let pared1, pared2, pared3, pared4, pared5
+let pared11, pared21, pared32, pared42, pared52, pared111, pared521
+let pared41, pared40, pared43, pared44, pared45, pared46, pared47, pared48, pared49
 //let miniJefeImagen;
 let personaimagen;
 let tiempLlave4 = false;
@@ -25,11 +25,12 @@ let llaveElectro = false;
 let llaveCount = 0; //llaves encontradas
 let contColLlave2 = 0;
 let fuego1;
+let fireShots, fuegoSpritesheet;
+let lastDirection;
 
-function preload(){
-
+function preload() {
+	fuegoSpritesheet = loadAnimation("./fotos/fire.png", { frameSize: [64, 64], frames: 3 });
 }
-
 function setup() {
 	new Canvas(650, 650);
 
@@ -38,13 +39,12 @@ function setup() {
 	player.rotationLock = true;
 
 	shots = new Group();
+	fireShots = new Group();
+	fireShots.addAni(fuegoSpritesheet);
+
 	miniJefe = new Sprite(650 / 2, 650 / 2, 65);
 	miniJefe.mass = 1;
 	miniJefe.text = "Mini jefe";
-	//miniJefeImagen = loadImage("fotos/jefe.jpg")
-	//miniJefeImagen.w = 65;
-	//miniJefeImagen.h = 65;
-	//miniJefe.addImage(miniJefeImagen);
 	miniJefe.rotationLock = true;
 
 	//los murhos
@@ -62,33 +62,30 @@ function setup() {
 	wally3 = new Sprite(600, 185, 70, 3, 'static');
 	// tercer minijuego
 	//pared abajo
-	pared1  = new Sprite(162, 597, 217, 1, 'static');
+	pared1 = new Sprite(162, 597, 217, 1, 'static');
 	//pared!
-	pared2  = new Sprite(53, 473, 1, 248, 'static');
-//pared arriba
+	pared2 = new Sprite(53, 473, 1, 248, 'static');
+	//pared arriba
 	pared3 = new Sprite(103, 350, 100, 1, 'static');
 	//pared arriba
 	pared5 = new Sprite(155, 350, 120, 1, 'static');
-//pared de la  !
+	//pared de la  !
 	pared4 = new Sprite(270, 473, 1, 248, 'static');
 
 	pared11 = new Sprite(160, 544, 110, 1, 'static');
 	pared21 = new Sprite(105, 472, 1, 140, 'static');
 	pared32 = new Sprite(160, 402, 110, 1, 'static');
-	pared52 = new Sprite(215, 445, 1, 85 , 'static');
+	pared52 = new Sprite(215, 445, 1, 85, 'static');
 	pared111 = new Sprite(188, 488, 55, 1, 'static');
-	pared521 = new Sprite(161, 474, 1, 28 , 'static');
-
+	pared521 = new Sprite(161, 474, 1, 28, 'static');
 
 	//ultimo mini juego 
 	pared41 = new Sprite(460, 595, 110, 1, 'static');
 	pared40 = new Sprite(597, 620, 1, 100, 'static');
 	pared43 = new Sprite(590, 515, 150, 1, 'static');
-	pared44 = new Sprite(568, 620, 1, 100 , 'static');
+	pared44 = new Sprite(568, 620, 1, 100, 'static');
 	pared45 = new Sprite(582, 569, 29, 1, 'static');
-	pared46 = new Sprite(516, 555, 1, 80 , 'static');
-
-
+	pared46 = new Sprite(516, 555, 1, 80, 'static');
 
 	//wall13 = new Sprite(490, 245, 280, 10, 'static');
 	wall13 = new Sprite(395, 245, 90, 10, 'static');
@@ -185,9 +182,8 @@ function setup() {
 }
 
 function draw() {
-	background('gray');
-
 	document.getElementById("llaveCountNumber").textContent = "Llaves recogidas: " + llaveCount;
+	background('gray');
 
 	fill("lightblue"); //obstaculo agua (maze1)
 	square(137.5, 138, 55);
@@ -230,16 +226,20 @@ function draw() {
 
 	if (kb.pressing('left')) {
 		player.vel.x = -2;
+		lastDirection = "left";
 	} else if (kb.pressing('right')) {
 		player.vel.x = 2;
+		lastDirection = "right";
 	} else {
 		player.vel.x = 0;
 	}
 
 	if (kb.pressing('up')) {
 		player.vel.y = -2;
+		lastDirection = "up";
 	} else if (kb.pressing('down')) {
 		player.vel.y = 2;
+		lastDirection = "down";
 	} else {
 		player.vel.y = 0;
 	}
@@ -257,18 +257,49 @@ function draw() {
 
 	if (playerType != "Fuego") { //por ahora el unico k tiene comportamiento diferente es el fuego, si hay otro pueden agregarlo aca para cada uno
 		if (kb.pressed("q")) {
-			shot = new shots.Sprite(player.x - 50, player.y, 5, 5);
-			shot.life = 50;
-			shot.vel.x = -30;
-			shot.color = shotsColor;
-			shot.rotationLock = true;
+			switch (lastDirection) {
+				case "up":
+					shot2 = new shots.Sprite(player.x, player.y - 50, 5, 5);
+					shot2.vel.y = -20;
+					break;
+				case "down":
+					shot2 = new shots.Sprite(player.x, player.y + 50, 5, 5);
+					shot2.vel.y = 20;
+					break;
+				case "left":
+					shot2 = new shots.Sprite(player.x - 50, player.y, 5, 5);
+					shot2.vel.x = -20;
+					break;
+				case "right":
+					shot2 = new shots.Sprite(player.x + 50, player.y, 5, 5);
+					shot2.vel.x = 20;
+					break;
+			}
+			shot2.life = 30;
+			shot2.color = shotsColor;
 		}
 	} else {
 		if (kb.pressing("q")) {
-			shot = new shots.Sprite(player.x - 50, player.y, 5, 5);
-			shot.life = 50;
-			shot.vel.x = -30;
-			shot.color = shotsColor;
+			switch (lastDirection) {
+				case "up":
+					shot2 = new fireShots.Sprite(player.x, player.y - 50, 5, 5);
+					shot2.vel.y = -20;
+					break;
+				case "down":
+					shot2 = new fireShots.Sprite(player.x, player.y + 50, 5, 5);
+					shot2.vel.y = 20;
+					break;
+				case "left":
+					shot2 = new fireShots.Sprite(player.x - 50, player.y, 5, 5);
+					shot2.vel.x = -20;
+					break;
+				case "right":
+					shot2 = new fireShots.Sprite(player.x + 50, player.y, 5, 5);
+					shot2.vel.x = 20;
+					break;
+			}
+			shot2.life = 30;
+			shot2.color = shotsColor;
 		}
 	}
 	if (playerType == "Electro") {
@@ -330,7 +361,7 @@ function changeCharacter() {
 
 		electro1.remove();
 		electro1 = new Sprite(537, 85, 15, 9, "static");
-		electro1 .color = 'yellow';
+		electro1.color = 'yellow';
 
 		fuego1.remove();
 		fuego1 = new Sprite(535, 212, 55, 55, "static");
@@ -350,7 +381,7 @@ function changeCharacter() {
 		fuego1 = new Sprite(535, 212, 55, 55, "static");
 		fuego1.color = 'red';
 	}
-	}
+}
 
 
 function colisionLlave2() {
