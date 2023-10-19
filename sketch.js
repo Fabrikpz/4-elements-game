@@ -9,16 +9,13 @@ let tiempLlave4 = false;
 let vidaEnemigo = 5;
 let tiempoLlave4 = 0;
 const intervaloLlave4 = 5000;
-let agua1;
-let viento1;
-let electro1;
+let agua1, viento1, electro1;
 let llave1, llave2, llave3, llave4;
 let llave1Obtained = false;
 let llave2Obtained = false;
 let llave3Obtained = false;
 let llave4Obtained = false;
-let puertaElectro;
-let button;
+let puertaElectro, button;
 let puertaAbierta = false;
 let llaveRecogida = false;
 let shot;
@@ -29,11 +26,14 @@ let llaveCount = 0; //llaves encontradas
 let contColLlave2 = 0;
 let fuego1;
 
+function preload(){
+
+}
+
 function setup() {
 	new Canvas(650, 650);
 
 	player = new Sprite(650 / 2, 600, 50);
-	// correjir !personaimagen = loadImage('Captura.PNG')
 	player.text = "Agua";
 	player.rotationLock = true;
 
@@ -189,11 +189,15 @@ function draw() {
 
 	document.getElementById("llaveCountNumber").textContent = "Llaves recogidas: " + llaveCount;
 
-	fill("lightblue");
+	fill("lightblue"); //obstaculo agua (maze1)
 	square(137.5, 138, 55);
 
 	fill("gray");
-	square(388, 12.5, 55);
+	square(388, 12.5, 55); //obstaculo viento (maze2)
+
+	fill("red");
+	square(506.9, 184.5, 55); //obstaculo fuego (maze2)
+
 	fill("red");
 	square(405, 595, 55);
 	fill("grey");
@@ -216,7 +220,7 @@ function draw() {
 		tieneLlave = true;
 	}
 
-	if (puertaAbierta) {
+	if (puertaAbierta) { //para q se cierre la puerta
 		setTimeout(() => {
 			puertaAbierta = false;
 			puertaElectro = new Sprite(55, 220, 45, 55, "static");
@@ -265,18 +269,17 @@ function draw() {
 			shot.life = 50;
 			shot.vel.x = -30;
 			shot.color = shotsColor;
-			console.log("que")
-			if (playerType == "Electro") {
-				button.collides(shot, (button, shot) => {
-					if (llaveRecogida) {
-						shot.remove();
-						button.x -= 10;
-						puertaAbierta = true;
-						puertaElectro.remove();
-					}
-				});
-			}
 		}
+	}
+	if (playerType == "Electro") {
+		button.collides(shots, (button, shot) => {
+			if (llaveRecogida) {
+				shot.remove();
+				button.x -= 2;
+				puertaAbierta = true;
+				puertaElectro.remove();
+			}
+		});
 	}
 }
 
