@@ -6,9 +6,9 @@
 
 1. Clonar el repositorio
 2. Abrir en Visual Studio Code
-3. Instalar la extension de p5 Live Share
-4. Descargar las dependecias de p5 con "npm i p5"
-5. Abrir el juego por Live Share
+3. Instalar la extension de Live Server
+4. Descargar las dependecias de p5 con "npm i"
+5. Abrir el juego por Live Server
 
 ## Miembros
 
