@@ -1,7 +1,18 @@
-# p5play template (edit me!)
+# Juego de P5Play para ONIET
 
-This p5play-template folder contains a basic p5play project that you can run offline.
+¡Bienvenido al juego creado para ONIET! Este juego utiliza la biblioteca p5 play para crear una experiencia interactiva.
 
-Install the [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) Visual Studio Code extension so you can run your project in a web browser. Click "Go Pahan Gay" in the bottom right corner of Visual Studio Code to start the server.
+## Pasos para ejecutar el juego
 
-If you want to keep p5play updated, install [bun](https://bun.sh/) or [npm](https://nodejs.org). Then in the file menu hover over "Terminal" and select "New Terminal". In your p5play project folder run `bun update` or `npm update` to update p5play to the latest version.
+1. Clonar el repositorio
+2. Abrir en Visual Studio Code
+3. Instalar la extension de p5 Live Share
+4. Descargar las dependecias de p5 con "npm i p5"
+5. Abrir el juego por Live Share
+
+## Miembros
+
+* Fabricio Silveyra
+* Lautaro Cuesta
+* Juan Cruz Masante
+* Marcos Ariza
