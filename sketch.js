@@ -27,20 +27,29 @@ let contColLlave2 = 0;
 let fuego1;
 let fireShots, fuegoSpritesheet;
 let lastDirection;
+let psjSpritesheet;
 
 function preload() {
 	fuegoSpritesheet = loadAnimation("./fotos/fire.png", { frameSize: [64, 64], frames: 3 });
+	fuegoSpritesheetRight = loadAnimation("./fotos/fire-right.png", { frameSize: [64, 64], frames: 3 });
+	fuegoSpritesheetUp = loadAnimation("./fotos/fire-up.png", { frameSize: [64, 64], frames: 3 });
+	fuegoSpritesheetDown = loadAnimation("./fotos/fire-down.png", { frameSize: [64, 64], frames: 3 });
+	player = new Sprite(650 / 2, 600, 50);
+	/*player.spriteSheet = "./fotos/psjmain.png";
+	player.text = "Agua";
+	player.rotationLock = true;
+	player.anis.frameDelay = 8;
+	player.addAnis({
+		idle: {row: 3, frames: 4}
+	});
+	player.changeAni('idle');*/
 }
 function setup() {
 	new Canvas(650, 650);
 
-	player = new Sprite(650 / 2, 600, 50);
-	player.text = "Agua";
-	player.rotationLock = true;
-
 	shots = new Group();
 	fireShots = new Group();
-	fireShots.addAni(fuegoSpritesheet);
+	fireShots.addAni(fuegoSpritesheetUp);
 
 	miniJefe = new Sprite(650 / 2, 650 / 2, 65);
 	miniJefe.mass = 1;
@@ -282,18 +291,22 @@ function draw() {
 		if (kb.pressing("q")) {
 			switch (lastDirection) {
 				case "up":
+					fireShots.addAni(fuegoSpritesheetUp);
 					shot2 = new fireShots.Sprite(player.x, player.y - 50, 5, 5);
 					shot2.vel.y = -20;
 					break;
 				case "down":
+					fireShots.addAni(fuegoSpritesheetDown);
 					shot2 = new fireShots.Sprite(player.x, player.y + 50, 5, 5);
 					shot2.vel.y = 20;
 					break;
 				case "left":
+					fireShots.addAni(fuegoSpritesheet);
 					shot2 = new fireShots.Sprite(player.x - 50, player.y, 5, 5);
 					shot2.vel.x = -20;
 					break;
 				case "right":
+					fireShots.addAni(fuegoSpritesheetRight);
 					shot2 = new fireShots.Sprite(player.x + 50, player.y, 5, 5);
 					shot2.vel.x = 20;
 					break;
@@ -401,4 +414,8 @@ function colisionLlave2() {
 		llaveCount++;
 		llave2.remove();
 	}
+}
+
+function psjMovimientos(){
+
 }
