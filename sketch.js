@@ -22,7 +22,7 @@ let shot, rect, puertaElectro2;
 let shotsColor = "blue";
 let playerType;
 let llaveElectro = false;
-let llaveCount = 4; //llaves encontradas
+let llaveCount = 0; //llaves encontradas
 let contColLlave2 = 0;
 let fuego1;
 let fireShots, fuegoSpritesheet;
