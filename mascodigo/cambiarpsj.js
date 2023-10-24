@@ -2,6 +2,7 @@ function changeCharacter() {
 	if (kb.pressed('1')) {
 		//personaimagen = loadImage('Captura.PNG')
 		player.text = "Agua";
+		playerType = "Agua";
 		if (nivelActual == 1) {
 			agua1.remove();
 			shotsColor = "blue";
@@ -19,6 +20,7 @@ function changeCharacter() {
 	}
 	if (kb.pressed('2')) {
 		player.text = "Fuego";
+		playerType = "Fuego";
 		if (nivelActual == 1) {
 			agua1.remove();
 			agua1 = new Sprite(165, 165, 55, 55, "static");
@@ -36,6 +38,7 @@ function changeCharacter() {
 	}
 	if (kb.pressed('3')) {
 		player.text = "Viento";
+		playerType = "Viento";
 		if (nivelActual == 1) {
 			agua1.remove();
 			agua1 = new Sprite(165, 165, 55, 55, "static");
@@ -53,6 +56,7 @@ function changeCharacter() {
 	}
 	if (kb.pressed('4')) {
 		player.text = "Electro";
+		playerType = "Electro";
 		if (nivelActual == 1) {
 			agua1.remove();
 			agua1 = new Sprite(165, 165, 55, 55, "static");

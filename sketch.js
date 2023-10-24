@@ -29,7 +29,7 @@ let fireShots, fuegoSpritesheet;
 let lastDirection, rect2;
 let psjSpritesheet;
 let nivelActual = 1;
-let obstaculos, jefefinal;
+let obstaculos, jefefinal, bossShots;
 
 function preload() {
 	fuegoSpritesheet = loadAnimation("./fotos/fire.png", { frameSize: [64, 64], frames: 3 });
@@ -53,6 +53,7 @@ function setup() {
 	shots = new Group();
 	fireShots = new Group();
 	fireShots.addAni(fuegoSpritesheetUp);
+	bossShots = new Group();
 
 	miniJefe = new Sprite(650 / 2, 650 / 2, 65);
 	miniJefe.mass = 1;
