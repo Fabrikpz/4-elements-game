@@ -77,6 +77,7 @@ function disparos() {
 function comprobarSiPerdes() {
     if (vida === 0) {
         fill("blue")
+        textSize(30);
         text("se", 300, 300)
         jefefinal.remove();
         bossShots.remove();
@@ -143,12 +144,5 @@ function borrarElementos() {
 function siGanas() {
     if (vidaBoss <= 0) {
         ganaste = true;
-        player.remove();
-        jefefinal.remove();
-        background("black");
-        fill("blue");
-        textAlign(CENTER, CENTER);
-        text("Se fue padreadisimo el boss", 650 / 2, 650 / 2);
-        text("GG changouu", 650 / 2, 650 / 2);
     }
 }

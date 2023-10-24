@@ -38,7 +38,7 @@ function cargarNivel2() {
 
     fireShots.collides(jefefinal, (fireShot, jefefinal) => {
         fireShot.remove();
-        vidaa = vidaBoss-=100;
+        vidaa = vidaBoss-= 0.5;
         updateHealthBoss(vidaa);
     });
 

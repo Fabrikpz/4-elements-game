@@ -22,7 +22,7 @@ let shot, rect, puertaElectro2;
 let shotsColor = "blue";
 let playerType;
 let llaveElectro = false;
-let llaveCount = 4; //llaves encontradas
+let llaveCount = 0; //llaves encontradas
 let contColLlave2 = 0;
 let fuego1;
 let fireShots, fuegoSpritesheet;
@@ -85,4 +85,18 @@ function draw() {
 	changeCharacter();
 	disparos();
 	comprobarSiPerdes();
+
+	siGanas();
+
+    if (ganaste) {
+        player.remove();
+        jefefinal.remove();
+        background("black");
+        fill("blue");
+        textAlign(CENTER, CENTER);
+		textSize(30);
+        text("Se fue padreadisimo el boss", 650 / 2, (650 / 2) - 35);
+        text("GG changouu", 650 / 2, 650 / 2)
+		bossShots.remove();
+    }
 }
