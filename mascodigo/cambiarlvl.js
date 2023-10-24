@@ -23,6 +23,7 @@ function cargarNivel2() {
     }
 
 	jefefinal = new Sprite(650 / 2, 650 / 2, 85);
+	jefefinal.collider = "static";
 	jefefinal.color = "green";
 
     startShooting();
@@ -46,7 +47,7 @@ function stopShooting() {
 
 function shootingLoop() {
     if (isShooting) {
-        bossShot = new bossShots.Sprite(random(jefefinal.x - 30, jefefinal.x + 30), random(jefefinal.y - 30, jefefinal.y + 30), 5, 5);
+        bossShot = new bossShots.Sprite(random(jefefinal.x - 75, jefefinal.x + 75), random(jefefinal.y - 75, jefefinal.y + 75), 5, 5);
         bossShot.vel.x = random(-25, 25);
         bossShot.vel.y = random(-25, 25);
 		bossShot.life = 50;
