@@ -9,6 +9,9 @@ let shootingInterval;
 let isShooting = false;
 let shootingDuration = 1000; 
 let restDuration = 3000;
+let isMoving = false; 
+let moveDuration = 2900;
+let hasMoved = false;
 
 function cargarNivel2() {
 	player.x = 0;
@@ -26,14 +29,19 @@ function cargarNivel2() {
 	jefefinal.collider = "static";
 	jefefinal.color = "green";
 
-    startShooting();
+    setTimeout(startShooting, 6000);
+
+	/*if (!hasMoved) {
+        setTimeout(startMoving, restDuration);
+        hasMoved = true; //jefe ya cambió de posición
+    }*/
 }
 
 function startShooting() {
     isShooting = true;
     shootingInterval = setInterval(shootingLoop, 100); //crear disparos cada 100 milisegundos
 
-    //detener el disparo después de la duración
+    //detener el disparo después del rest
     setTimeout(stopShooting, shootingDuration);
 }
 
@@ -43,7 +51,24 @@ function stopShooting() {
 
     //iniciar un nuevo intervalo después del descanso
     setTimeout(startShooting, restDuration);
+    //iniciar el movimiento del jefe durante el descanso
+    setTimeout(startMoving, restDuration);
 }
+
+/*function startMoving() {
+    isMoving = true;
+
+	jefefinal.collider = "dynamic";
+    jefefinal.vel.x = random(-2, 2);
+    jefefinal.vel.y = random(-2, 2);
+    
+    setTimeout(stopMoving, moveDuration);
+}
+
+function stopMoving() {
+    isMoving = false;
+	jefefinal.collider = "static";
+}*/
 
 function shootingLoop() {
     if (isShooting) {
