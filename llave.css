@@ -24,6 +24,13 @@
   background-color: #00cc00;
   border-radius: 5px;
 }
+.health-fill-boss {
+  width:150px;
+  height: 100%;
+  background-color: #00cc00;
+  border-radius: 5px;
+}
+
 
 .health-text {
   margin-top: 10px;

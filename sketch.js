@@ -34,6 +34,7 @@ let vida = 100;
 let contHabilidadViento = 0;
 let llave3Agarrada = false;
 let escudoJefe;
+let ganaste = false;
 
 function preload() {
 	fuegoSpritesheet = loadAnimation("./fotos/fire.png", { frameSize: [64, 64], frames: 3 });

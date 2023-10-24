@@ -20,8 +20,8 @@ function controles() {
     }
 }
 
-function disparos(){
-    if (playerType != "Fuego" && vida != 0) { //por ahora el unico k tiene comportamiento diferente es el fuego, si hay otro pueden agregarlo aca para cada uno
+function disparos() {
+    if (playerType != "Fuego" && vida != 0 && ganaste == false) { //por ahora el unico k tiene comportamiento diferente es el fuego, si hay otro pueden agregarlo aca para cada uno
         if (kb.pressed("q")) {
             switch (lastDirection) {
                 case "up":
@@ -45,7 +45,7 @@ function disparos(){
             shot2.color = shotsColor;
         }
     } else {
-        if (kb.pressing("q") && vida != 0) {
+        if (kb.pressing("q") && vida != 0 && ganaste == false) {
             switch (lastDirection) {
                 case "up":
                     fireShots.addAni(fuegoSpritesheetUp);
@@ -74,8 +74,8 @@ function disparos(){
     }
 }
 
-function comprobarSiPerdes(){
-    if(vida === 0){
+function comprobarSiPerdes() {
+    if (vida === 0) {
         fill("blue")
         text("se", 300, 300)
         jefefinal.remove();
@@ -84,41 +84,71 @@ function comprobarSiPerdes(){
         player.remove();
         miniJefe.remove();
         llave1.remove();
-        llave2.remove(); 
+        llave2.remove();
         llave3.remove();
         llave4.remove();
         background("black");
         fill("red");
         textAlign(CENTER, CENTER);
-        text("GET PADRED!", 650/2, 650/2);
+        text("GET PADRED!", 650 / 2, 650 / 2);
     }
 }
 
 function updateHealth(value) {
-	const healthFill = document.querySelector('.health-fill');
-	const healthValue = document.querySelector('#health-value');
+    let healthFill = document.querySelector('.health-fill');
+    let healthValue = document.querySelector('#health-value');
 
-	value = Math.min(Math.max(value, 0), 100);
+    value = Math.min(Math.max(value, 0), 100);
 
-    if(value <= 40 && value >= 10){
+    if (value <= 40 && value >= 10) {
         healthFill.style.backgroundColor = 'yellow';
-    } else if(value <= 10){
+    } else if (value <= 10) {
         healthFill.style.backgroundColor = 'red';
     } else {
         healthFill.style.backgroundColor = '#00cc00';
     }
-	healthFill.style.width = value + '%';
-	healthValue.textContent = value;
+    healthFill.style.width = value + '%';
+    healthValue.textContent = value;
+}
+
+function updateHealthBoss(value) {
+    let healthFill = document.querySelector('.health-fill-boss');
+    let healthValue = document.querySelector('#health-value-boss');
+
+    value = Math.min(Math.max(value, 0), 500);
+
+    if (value <= 200 && value >= 50) {
+        healthFill.style.backgroundColor = 'yellow';
+    } else if (value <= 60) {
+        healthFill.style.backgroundColor = 'red';
+    } else {
+        healthFill.style.backgroundColor = '#00cc00';
+    }
+    healthFill.style.width = (value / 5) + '%';
+    healthValue.textContent = value.toFixed(0)
 }
 
 
-function borrarElementos(){
+function borrarElementos() {
     miniJefe.remove();
-	fuego1.remove();
-	electro1.remove();
-	agua1.remove();
-	viento1.remove();
-	for (let i = obstaculos.length - 1; i >= 0; i--) {
+    fuego1.remove();
+    electro1.remove();
+    agua1.remove();
+    viento1.remove();
+    for (let i = obstaculos.length - 1; i >= 0; i--) {
         obstaculos[i].remove();
+    }
+}
+
+function siGanas() {
+    if (vidaBoss <= 0) {
+        ganaste = true;
+        player.remove();
+        jefefinal.remove();
+        background("black");
+        fill("blue");
+        textAlign(CENTER, CENTER);
+        text("Se fue padreadisimo el boss", 650 / 2, 650 / 2);
+        text("GG changouu", 650 / 2, 650 / 2);
     }
 }

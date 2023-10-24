@@ -13,6 +13,8 @@ let isMoving = false;
 let moveDuration = 2900;
 let hasMoved = false;
 let angle = 0;
+let executed = false;
+let vidaBoss = 500;
 
 function cargarNivel2() {
     player.x = 0;
@@ -26,7 +28,7 @@ function cargarNivel2() {
 
     //escudoJefe = new Sprite(jefefinal.x - 70, jefefinal.y - 30, 50, "dynamic");
 
-    setTimeout(startShooting, 6000);
+    setTimeout(startShooting, 600);
 
     bossShots.collides(player, (bossShot, player) => {
         vidaa = vida -= 10;
@@ -34,8 +36,24 @@ function cargarNivel2() {
         updateHealth(vidaa);
     });
 
+    fireShots.collides(jefefinal, (fireShot, jefefinal) => {
+        fireShot.remove();
+        vidaa = vidaBoss-=100;
+        updateHealthBoss(vidaa);
+    });
+
+    shots.collides(jefefinal, (shot, jefefinal) => {
+        shot.remove();
+        vidaa2 = vidaBoss-=0.2;
+        updateHealthBoss(vidaa2);
+    });
+
     if (vida <= 0) {
         comprobarSiPerdes();
+    }
+
+    if(vidaBoss <= 0){
+        siGanas();
     }
 
     /*if (!hasMoved) {
@@ -59,7 +77,7 @@ function stopShooting() {
     //iniciar un nuevo intervalo después del descanso
     setTimeout(startShooting, restDuration);
     //iniciar el movimiento del jefe durante el descanso
-    setTimeout(startMoving, restDuration);
+    //setTimeout(startMoving, restDuration);
 }
 
 /*function startMoving() {
@@ -78,10 +96,19 @@ function stopMoving() {
 }*/
 
 function shootingLoop() {
+    let velShots = [-6, -5, -4, -3, -2, 2, 3, 4, 5, 6];
+    let posShotsX = [];
+    let posShotsY = [jefefinal.y - 60, jefefinal.y + 60];
+    if (executed == false) {
+        for (let i = -60; i < jefefinal.x + 60; i += 5) {
+            posShotsX.push(jefefinal.x + i);
+        }
+        executed = true;
+    }
     if (isShooting) {
-        bossShot = new bossShots.Sprite(random(jefefinal.x - 75, jefefinal.x + 75), random(jefefinal.y - 75, jefefinal.y + 75), 5, 5);
-        bossShot.vel.x = random(-25, 25);
-        bossShot.vel.y = random(-25, 25);
-        bossShot.life = 50;
+        bossShot = new bossShots.Sprite(random(posShotsX), random(posShotsY), 15);
+        bossShot.vel.x = random(velShots);
+        bossShot.vel.y = random(velShots);
+        bossShot.life = 100;
     }
 }
