@@ -9,16 +9,15 @@
 	<style>
 		body {
 			margin: 0;
-			padding: 0;
-			align-items: center;
 			overscroll-behavior: none;
 			background-color: #cfafaf;
+			display: flex;
+			justify-content: center;
+			align-items: center;
 		}
 
 		canvas {
-			display: flex;
-			/* Elimina el espacio adicional debajo del canvas */
-			justify-content: center;
+			display: block;
 			margin: 0 auto;
 		}
 	</style>
@@ -32,15 +31,18 @@
 		<script src="node_modules/p5play/p5play.js"></script>
 		<script src="sketch.js"></script>
 		<script src="./mascodigo/juegoparte1.js"></script>
-		<script src="./mascodigo/disparos.js"></script>
 		<script src="./mascodigo/cambiarpsj.js"></script>
 		<script src="./mascodigo/cambiarlvl.js"></script>
-		<script src="./mascodigo/controles.js"></script>
+		<script src="./mascodigo/control.js"></script>
 		<script src="./mascodigo/generacionlaberinto1.js"></script>
 		<script src="./mascodigo/generacionsprites.js"></script>
 	</div>
 	<div class="counter">
 		<span class="counter-number" id="llaveCountNumber">Llaves recogidas: </span>
+		<div class="health-text">Vida: <span id="health-value">100</span></div>
+		<div class="health-bar">
+			<div class="health-fill"></div>
+		</div>
 	</div>
 </body>
 

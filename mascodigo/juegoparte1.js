@@ -36,6 +36,7 @@ function gamePart1() {
 
 	player.overlaps(llave3, (player, llave3) => {
 		llave3.remove();
+		llave3Agarrada = true;
 		llaveCount++;
 	});
 
@@ -77,6 +78,40 @@ function gamePart1() {
 				puertaElectro.remove();
 			}
 		});
+	}
+
+	player.collides(miniJefe, () => {
+		vida--;
+		updateHealth(vida);
+	});
+
+	if (kb.pressing("space") && playerType === "Viento" && contHabilidadViento === 0) {
+		switch (lastDirection) {
+			case "up":
+				player.y -= 30;
+				contHabilidadViento++;
+				break;
+			case "down":
+				player.y += 30;
+				contHabilidadViento++;
+				break;
+			case "right":
+				player.x += 30;
+				contHabilidadViento++;
+				break;
+			case "left":
+				player.x -= 30;
+				contHabilidadViento++;
+				break;
+		}
+	}
+
+	if (llave3Agarrada) {
+		text("SPACE para habilidad de salto", player.x - 70, player.y - 30);
+		setTimeout(() => {
+			llave3Agarrada = false;
+			clear();
+		}, 3000);
 	}
 }
 

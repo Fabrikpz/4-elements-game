@@ -1,37 +1,44 @@
 function cambiarNivel() {
-	nivelActual++;
-	if (nivelActual === 2) {
-		cargarNivel2();
-	}
+    nivelActual++;
+    if (nivelActual === 2) {
+        cargarNivel2();
+    }
 }
 
 let shootingInterval;
 let isShooting = false;
-let shootingDuration = 1000; 
+let shootingDuration = 5000;
 let restDuration = 3000;
-let isMoving = false; 
+let isMoving = false;
 let moveDuration = 2900;
 let hasMoved = false;
+let angle = 0;
 
 function cargarNivel2() {
-	player.x = 0;
-	player.y = 400;
-	//puertaElectro2.remove();
-	miniJefe.remove();
-	electro1.remove();
-	agua1.remove();
-	viento1.remove();
-	for (let i = obstaculos.length - 1; i >= 0; i--) {
-        obstaculos[i].remove();
-    }
+    player.x = 0;
+    player.y = 400;
+    //puertaElectro2.remove();
+    borrarElementos();
 
-	jefefinal = new Sprite(650 / 2, 650 / 2, 85);
-	jefefinal.collider = "static";
-	jefefinal.color = "green";
+    jefefinal = new Sprite(650 / 2, 650 / 2, 85);
+    jefefinal.collider = "static";
+    jefefinal.color = "green";
+
+    //escudoJefe = new Sprite(jefefinal.x - 70, jefefinal.y - 30, 50, "dynamic");
 
     setTimeout(startShooting, 6000);
 
-	/*if (!hasMoved) {
+    bossShots.collides(player, (bossShot, player) => {
+        vidaa = vida -= 10;
+        bossShot.remove();
+        updateHealth(vidaa);
+    });
+
+    if (vida <= 0) {
+        comprobarSiPerdes();
+    }
+
+    /*if (!hasMoved) {
         setTimeout(startMoving, restDuration);
         hasMoved = true; //jefe ya cambió de posición
     }*/
@@ -58,7 +65,7 @@ function stopShooting() {
 /*function startMoving() {
     isMoving = true;
 
-	jefefinal.collider = "dynamic";
+    jefefinal.collider = "dynamic";
     jefefinal.vel.x = random(-2, 2);
     jefefinal.vel.y = random(-2, 2);
     
@@ -67,7 +74,7 @@ function stopShooting() {
 
 function stopMoving() {
     isMoving = false;
-	jefefinal.collider = "static";
+    jefefinal.collider = "static";
 }*/
 
 function shootingLoop() {
@@ -75,6 +82,6 @@ function shootingLoop() {
         bossShot = new bossShots.Sprite(random(jefefinal.x - 75, jefefinal.x + 75), random(jefefinal.y - 75, jefefinal.y + 75), 5, 5);
         bossShot.vel.x = random(-25, 25);
         bossShot.vel.y = random(-25, 25);
-		bossShot.life = 50;
+        bossShot.life = 50;
     }
 }

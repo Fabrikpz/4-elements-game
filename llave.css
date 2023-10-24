@@ -1,10 +1,32 @@
 .counter {
-  display: flex;
-  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 10px;
 }
 
 .counter-number {
   background-color: rgba(0, 0, 0, 0.027);
-  padding: 10px;
   border-radius: 10px;
+}
+
+.health-bar {
+  width: 150px;
+  height: 15px; 
+  background-color: #ccc;
+  border: 1px solid #000;
+  border-radius: 5px;
+}
+
+.health-fill {
+  width: 100%;
+  height: 100%;
+  background-color: #00cc00;
+  border-radius: 5px;
+}
+
+.health-text {
+  margin-top: 10px;
+  font-size: 18px;
+  font-weight: bold;
 }

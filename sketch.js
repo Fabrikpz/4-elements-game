@@ -22,7 +22,7 @@ let shot, rect, puertaElectro2;
 let shotsColor = "blue";
 let playerType;
 let llaveElectro = false;
-let llaveCount = 0; //llaves encontradas
+let llaveCount = 4; //llaves encontradas
 let contColLlave2 = 0;
 let fuego1;
 let fireShots, fuegoSpritesheet;
@@ -30,6 +30,10 @@ let lastDirection, rect2;
 let psjSpritesheet;
 let nivelActual = 1;
 let obstaculos, jefefinal, bossShots;
+let vida = 100;
+let contHabilidadViento = 0;
+let llave3Agarrada = false;
+let escudoJefe;
 
 function preload() {
 	fuegoSpritesheet = loadAnimation("./fotos/fire.png", { frameSize: [64, 64], frames: 3 });
@@ -45,6 +49,8 @@ function preload() {
 	player.changeAni('idle');*/
 	player.text = "Agua";
 	player.rotationLock = true;
+
+	miniJefe = new Sprite(650 / 2, 650 / 2, 75);
 }
 function setup() {
 	new Canvas(650, 650);
@@ -55,10 +61,11 @@ function setup() {
 	fireShots.addAni(fuegoSpritesheetUp);
 	bossShots = new Group();
 
-	miniJefe = new Sprite(650 / 2, 650 / 2, 65);
+
 	miniJefe.mass = 1;
 	miniJefe.text = "Mini jefe";
 	miniJefe.rotationLock = true;
+	miniJefe.img = "./fotos/minijefe.png";
 	generacionSprites();
 	generacionLaberinto1();
 }
@@ -76,4 +83,5 @@ function draw() {
 	controles();
 	changeCharacter();
 	disparos();
+	comprobarSiPerdes();
 }
