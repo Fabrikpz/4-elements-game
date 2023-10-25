@@ -28,7 +28,7 @@ function cargarNivel2() {
 
     //escudoJefe = new Sprite(jefefinal.x - 70, jefefinal.y - 30, 50, "dynamic");
 
-    setTimeout(startShooting, 600);
+    setTimeout(startShooting, 4000);
 
     bossShots.collides(player, (bossShot, player) => {
         vidaa = vida -= 10;
