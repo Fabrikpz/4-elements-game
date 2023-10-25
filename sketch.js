@@ -34,7 +34,6 @@ let vida = 100;
 let contHabilidadViento = 0;
 let llave3Agarrada = false;
 let escudoJefe;
-let ganaste = false;
 
 function preload() {
 	fuegoSpritesheet = loadAnimation("./fotos/fire.png", { frameSize: [64, 64], frames: 3 });
@@ -86,17 +85,10 @@ function draw() {
 	disparos();
 	comprobarSiPerdes();
 
-	siGanas();
-
-    if (ganaste) {
-        player.remove();
-        jefefinal.remove();
-        background("black");
-        fill("blue");
-        textAlign(CENTER, CENTER);
-		textSize(30);
-        text("Se fue padreadisimo el boss", 650 / 2, (650 / 2) - 35);
-        text("GG changouu", 650 / 2, 650 / 2)
-		bossShots.remove();
+	if (vida <= 0 && llaveCount === 4) {
+        perdesLvlFinal();
     }
+	if(vidaBoss <= 0){
+		siGanas();
+	}
 }

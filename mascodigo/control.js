@@ -74,13 +74,10 @@ function disparos() {
     }
 }
 
+let ganaste = false;
+
 function comprobarSiPerdes() {
-    if (vida === 0) {
-        fill("blue")
-        textSize(30);
-        text("se", 300, 300)
-        jefefinal.remove();
-        bossShots.remove();
+    if (vida <= 0) {
         borrarElementos();
         player.remove();
         miniJefe.remove();
@@ -129,6 +126,16 @@ function updateHealthBoss(value) {
     healthValue.textContent = value.toFixed(0)
 }
 
+function perdesLvlFinal() {
+    fill("blue")
+    jefefinal.remove();
+    bossShots.remove();
+    background("black");
+    fill("red");
+    textAlign(CENTER, CENTER);
+    text("GET PADRED!", 650 / 2, 650 / 2);
+}
+
 
 function borrarElementos() {
     miniJefe.remove();
@@ -142,7 +149,17 @@ function borrarElementos() {
 }
 
 function siGanas() {
-    if (vidaBoss <= 0) {
-        ganaste = true;
+    ganaste = true;
+    if (ganaste) {
+        player.remove();
+        jefefinal.remove();
+        background("black");
+        fill("blue");
+        textAlign(CENTER, CENTER);
+        textSize(30);
+        text("Se fue padreadisimo el boss", 650 / 2, (650 / 2) - 35);
+        text("GG changouu", 650 / 2, 650 / 2)
+        bossShots.remove();
     }
+
 }

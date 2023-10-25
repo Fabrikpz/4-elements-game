@@ -48,14 +48,6 @@ function cargarNivel2() {
         updateHealthBoss(vidaa2);
     });
 
-    if (vida <= 0) {
-        comprobarSiPerdes();
-    }
-
-    if(vidaBoss <= 0){
-        siGanas();
-    }
-
     /*if (!hasMoved) {
         setTimeout(startMoving, restDuration);
         hasMoved = true; //jefe ya cambió de posición
